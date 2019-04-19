@@ -6,7 +6,7 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 11:50:13 by smanhack          #+#    #+#             */
-/*   Updated: 2019/04/19 18:50:15 by smanhack         ###   ########.fr       */
+/*   Updated: 2019/04/19 18:50:56 by smanhack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	ft_defin_term(char *terms)
 	return (1);
 }
 
-int		ft_check_file(int fd)
+int			ft_check_file(int fd)
 {
 	char	*line;
 	size_t	num_str;
