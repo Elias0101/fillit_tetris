@@ -6,11 +6,11 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 15:07:06 by smanhack          #+#    #+#             */
-/*   Updated: 2019/04/18 09:43:08 by smanhack         ###   ########.fr       */
+/*   Updated: 2019/04/19 17:30:18 by smanhack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft/includes/get_next_line.h"
 #include <stdio.h>
 
 static t_list	*ft_give_lst(t_list **all_fd, int fd)
