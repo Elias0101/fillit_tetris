@@ -6,7 +6,7 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 11:50:13 by smanhack          #+#    #+#             */
-/*   Updated: 2019/04/19 17:53:22 by smanhack         ###   ########.fr       */
+/*   Updated: 2019/04/19 18:50:15 by smanhack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,17 @@ int		ft_check_file(int fd)
 	char	*term[4];
 	char	terms[100];
 
-	line = NULL;
 	num_str = 0;
-	while (get_next_line(fd, &line) && (num_term = num_str / 4) < 26)
+	while (get_next_line(fd, &line) && (num_term = num_str / 5) < 26)
 	{
-		num_str_term = num_str % 4;
+		num_str_term = num_str % 5;
+		ft_putnbr(num_str);
+		ft_putnbr(num_str_term);
 		ft_putendl(line);
-		if (num_str_term == 3)
+		if (num_str_term == 4)
 		{
-			//if (*line != '\0')
+			//ft_putendl(line);
+			//if (line != NULL)
 			//	return (-1);
 			if ((terms[num_term] = ft_defin_term(terms)) == 0)
 				return (-2);
@@ -62,9 +64,10 @@ int		ft_check_file(int fd)
 				return (-4);
 		}
 		free(line);
+		line = NULL;
 		num_str++;
 	}
-	if (get_next_line(fd, &line) != 0 || num_term == 26)
+	if (get_next_line(fd, &line) != 0 || num_term >= 26)
 		return (-5);
 	return (0);
 }
