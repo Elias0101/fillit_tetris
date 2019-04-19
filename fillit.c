@@ -6,7 +6,7 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 12:50:12 by smanhack          #+#    #+#             */
-/*   Updated: 2019/04/19 13:41:36 by smanhack         ###   ########.fr       */
+/*   Updated: 2019/04/19 16:21:29 by smanhack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@ int		main(int argc, char **argv)
 		return (1);
 	}
 	fd = open(argv[1], O_RDONLY);
-	
+	if (fd < 0)
+	{
+		ft_putendl("error");
+		return (1);
+	}
+
 	close(fd);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 15:07:42 by smanhack          #+#    #+#             */
-/*   Updated: 2019/04/19 15:47:33 by smanhack         ###   ########.fr       */
+/*   Updated: 2019/04/19 16:04:25 by smanhack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define BUFF_SIZE 5
 
 # include <libc.h>
-# include "libft/includes/libft.h"
+# include "libft.h"
 
 typedef struct		s_file
 {
