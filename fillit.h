@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noobytheturtle <noobytheturtle@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 12:55:39 by smanhack          #+#    #+#             */
-/*   Updated: 2019/04/19 17:36:58 by smanhack         ###   ########.fr       */
+/*   Updated: 2019/04/23 16:04:08 by noobythetur      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@
 # include "get_next_line.h"
 
 int		ft_check_file(int fd);
+
 
 #endif
