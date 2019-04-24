@@ -6,7 +6,7 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 11:50:13 by smanhack          #+#    #+#             */
-/*   Updated: 2019/04/22 14:26:20 by smanhack         ###   ########.fr       */
+/*   Updated: 2019/04/24 12:33:20 by smanhack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ int			ft_check_file(int fd)
 	while (get_next_line(fd, &line) && (num_term = num_str / 5) < 26)
 	{
 		num_str_term = num_str % 5;
-		ft_putnbr(num_str);
-		ft_putnbr(num_str_term);
-		ft_putendl(line);
+		//ft_putnbr(num_str);
+		//ft_putnbr(num_str_term);
+		//ft_putendl(line);
 		//ft_putendl("s");
 		if (num_str_term == 4)
 		{
-			if ((*line) != '\0')// Проверка на пустую 5 строку
+			if ((*line) != '\0')
 				return (-1);
 			if ((terms[num_term] = ft_defin_term(term)) == 0)
 				return (-2);
@@ -83,7 +83,8 @@ int			ft_check_file(int fd)
 		line = NULL;
 		num_str++;
 	}
-	//if (get_next_line(fd, &line) != 0 || num_term >= 26 || line != NULL)
-	//	return (-5); //Проверка на последнюю строку
+	//ft_putendl(line);
+	if (num_term == 26 || line != NULL)
+		return (-5);
 	return (0);
 }
