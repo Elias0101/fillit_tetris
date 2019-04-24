@@ -6,85 +6,125 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 11:50:13 by smanhack          #+#    #+#             */
-/*   Updated: 2019/04/24 12:33:20 by smanhack         ###   ########.fr       */
+/*   Updated: 2019/04/24 17:04:20 by smanhack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static char	*ft_check_line(char *line)
+static char	ft_check_term_v2(char *term)
 {
-	size_t	i;
+	int block;
+	int i;
+	int count;
 
+	count = 0;
+	block = 0;
 	i = 0;
-	while (i < 4)
+	while (i < 20)
 	{
-		if (line[i] != '.' && line[i] != '#')
-			return (NULL);
-		i++;
-	}
-	return (ft_strdup(line));
-}
-
-static char	ft_defin_term(char **term)
-{
-	size_t i;
-	size_t j;
-	// Проверка на фигуры и определение их
-	term = 0;
-	i = 0;
-	while (i < 4)
-	{
-		j = 0;
-		while (j < 4)
+		if (term[i] == '#')
 		{
-			//if (term[i][j] == '#' && !(term[i + 1][j] == '#' || term[i][j + 1]
-			//== '#' || term[i - 1][j] == '#' || term[i][j - 1] == '#'))
-			//	return (0);
-			j++;
+			if ((i + 1) < 20 && term[i + 1] == '#')
+				block++;
+			if ((i - 1) >= 0 && term[i - 1] == '#')
+				block++;
+			if ((i + 5) < 20 && term[i + 5] == '#')
+				block++;
+			if ((i - 5) >= 0 && term[i - 5] == '#')
+				block++;
+			count++;
 		}
 		i++;
 	}
-	return (1);
+	return ((block == 6 || block == 8) && (count == 4));
+}
+
+int			ft_check_term(char *line, int ref)
+{
+	int i;
+
+	i = 0;
+	while (i < 20)
+	{
+		if (i % 5 != 4)
+		{
+			if (line[i] != '.' && line[i] != '#')
+				return (-1);
+		}
+		else
+			if (line[i] != '\n')
+				return (-2);
+		i++;
+	}
+	if (ref == 21 && line[20] != '\n')
+		return (-3);
+	if (!(ft_check_term_v2(line)))
+		return (-4);
+	return (0);
 }
 
 int			ft_check_file(int fd)
 {
+	int		ref;
+	char	*line;
+
+	if (!(line = ft_strnew(21)))
+		return (-2);
+	//ft_putchar('s');
+	while ((ref = read(fd, line, 21)) >= 20)
+	{
+		ft_putnbr(ref);
+		ft_putchar('\n');
+		ft_putstr(line);
+		if (ft_check_term(line, ref) != 0)
+			return (-1);
+	}
+	//ft_putstr(line);
+	ft_putnbr(ref);
+	/*
 	char	*line;
 	size_t	num_str;
 	size_t	num_term;
 	size_t	num_str_term;
-	char	*term[4];
-	char	terms[26];
+	char	*term;
+	//char	terms[26];
 
 	num_str = 0;
+	term = ft_memalloc(16);
 	while (get_next_line(fd, &line) && (num_term = num_str / 5) < 26)
 	{
 		num_str_term = num_str % 5;
-		//ft_putnbr(num_str);
-		//ft_putnbr(num_str_term);
-		//ft_putendl(line);
+		ft_putnbr(num_str);
+		ft_putnbr(num_str_term);
+		ft_putendl(line);
 		//ft_putendl("s");
 		if (num_str_term == 4)
 		{
 			if ((*line) != '\0')
 				return (-1);
-			if ((terms[num_term] = ft_defin_term(term)) == 0)
-				return (-2);
+			//if (ft_defin_term(term))
+			//	return (-2);
+			free (term);
 		}
 		else
 		{
 			if (ft_strlen(line) != 4)
 				return (-3);
-			if ((term[num_str_term] = ft_check_line(line)) == NULL)
+			if (ft_check_line(line) == NULL)
 				return (-4);
+			//term = ft_memcpy((void *)term + (4 * num_term), line, 4);
 		}
-		free(line);
-		line = NULL;
+		//free(line);
+		//line = NULL;
 		num_str++;
 	}
-	//ft_putendl(line);
-	if (num_term == 26 || line != NULL)
+	//ft_putnbr(num_str);
+	//ft_putnbr(num_str_term);
+	ft_putstr(line);
+	if (num_term == 26 || num_str_term != 3)
 		return (-5);
+	*/
+	ft_putchar('\n');
 	return (0);
 }

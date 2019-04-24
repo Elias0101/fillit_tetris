@@ -6,7 +6,7 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 15:07:06 by smanhack          #+#    #+#             */
-/*   Updated: 2019/04/24 12:23:27 by smanhack         ###   ########.fr       */
+/*   Updated: 2019/04/24 13:07:49 by smanhack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ int				get_next_line(const int fd, char **line)
 
 	if (fd < 0 || !line || read(fd, buf, 0) < 0)
 		return (-1);
-	//*line = NULL;
 	buf_lst = (t_file *)ft_give_lst(&all_fd, fd)->content;
 	while (ft_strchr(buf_lst->line, '\n') == NULL &&
 	(ref = read(fd, buf, BUFF_SIZE)))
