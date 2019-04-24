@@ -6,13 +6,13 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 11:50:13 by smanhack          #+#    #+#             */
-/*   Updated: 2019/04/24 17:04:20 by smanhack         ###   ########.fr       */
+/*   Updated: 2019/04/24 17:21:17 by smanhack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static char	ft_check_term_v2(char *term)
+static int	ft_check_valid(char *term)
 {
 	int block;
 	int i;
@@ -40,7 +40,7 @@ static char	ft_check_term_v2(char *term)
 	return ((block == 6 || block == 8) && (count == 4));
 }
 
-int			ft_check_term(char *line, int ref)
+static int	ft_check_term(char *line, int ref)
 {
 	int i;
 
@@ -59,7 +59,7 @@ int			ft_check_term(char *line, int ref)
 	}
 	if (ref == 21 && line[20] != '\n')
 		return (-3);
-	if (!(ft_check_term_v2(line)))
+	if (!(ft_check_valid(line)))
 		return (-4);
 	return (0);
 }
@@ -68,20 +68,22 @@ int			ft_check_file(int fd)
 {
 	int		ref;
 	char	*line;
+	int		count_term;
 
 	if (!(line = ft_strnew(21)))
 		return (-2);
-	//ft_putchar('s');
+	count_term = 0;
 	while ((ref = read(fd, line, 21)) >= 20)
 	{
-		ft_putnbr(ref);
+		ft_putnbr(count_term);
 		ft_putchar('\n');
 		ft_putstr(line);
 		if (ft_check_term(line, ref) != 0)
 			return (-1);
+		count_term++;
 	}
-	//ft_putstr(line);
-	ft_putnbr(ref);
+	if (count_term > 26)
+		return (-1);
 	/*
 	char	*line;
 	size_t	num_str;
@@ -125,6 +127,6 @@ int			ft_check_file(int fd)
 	if (num_term == 26 || num_str_term != 3)
 		return (-5);
 	*/
-	ft_putchar('\n');
+	//ft_putchar('\n');
 	return (0);
 }
