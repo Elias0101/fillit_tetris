@@ -6,7 +6,7 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 11:50:13 by smanhack          #+#    #+#             */
-/*   Updated: 2019/04/24 17:21:17 by smanhack         ###   ########.fr       */
+/*   Updated: 2019/04/24 20:47:14 by smanhack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,22 @@ int			ft_check_file(int fd)
 	if (!(line = ft_strnew(21)))
 		return (-2);
 	count_term = 0;
-	while ((ref = read(fd, line, 21)) >= 20)
+	while ((ref = read(fd, line, 21)) == 21)
 	{
-		ft_putnbr(count_term);
+		ft_putnbr(ref);
 		ft_putchar('\n');
 		ft_putstr(line);
 		if (ft_check_term(line, ref) != 0)
 			return (-1);
 		count_term++;
 	}
+	if (ref != 20)
+		return (-2);
+	if ((ft_check_term(line, ref) != 0))
+		return (-1);
+	ft_putnbr(ref);
+	ft_putchar('\n');
+	ft_putstr(line);
 	if (count_term > 26)
 		return (-1);
 	/*
