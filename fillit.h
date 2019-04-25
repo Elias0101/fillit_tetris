@@ -6,7 +6,7 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 12:55:39 by smanhack          #+#    #+#             */
-/*   Updated: 2019/04/25 13:12:03 by smanhack         ###   ########.fr       */
+/*   Updated: 2019/04/25 14:54:13 by smanhack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef	struct	s_term
 
 }				t_term;
 
-int		ft_check_file(int fd);
+int		ft_check_file(int fd, char *line, t_term *data);
 
 
 #endif

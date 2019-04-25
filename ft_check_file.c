@@ -6,7 +6,7 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 11:50:13 by smanhack          #+#    #+#             */
-/*   Updated: 2019/04/25 14:28:11 by smanhack         ###   ########.fr       */
+/*   Updated: 2019/04/25 14:52:21 by smanhack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,17 +130,11 @@ t_term	ft_fill_data(char *line)
 	return (cord);
 }
 
-int			ft_check_file(int fd)
+int			ft_check_file(int fd, char	*line, t_term	*data)
 {
 	int		ref;
-	char	*line;
 	int		count_term;
-	t_term	*data;
 
-	if (!(data = (t_term *)malloc(sizeof(t_term) * 26)))
-		return (-2);
-	if (!(line = ft_strnew(21))) // Зафришить память
-		return (-2);
 	count_term = 0;
 	while ((ref = read(fd, line, 21)) == 21)// Защита на колличество терминошек
 	{
