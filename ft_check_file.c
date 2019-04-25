@@ -6,7 +6,7 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 11:50:13 by smanhack          #+#    #+#             */
-/*   Updated: 2019/04/25 14:52:21 by smanhack         ###   ########.fr       */
+/*   Updated: 2019/04/25 15:48:52 by smanhack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,19 @@ static int	ft_check_term(char *line, int ref)
 	return (0);
 }
 
-t_term	ft_mv_data(t_term cord)
+t_term		ft_mv_data(t_term cord)
 {
 	int		offset_x;
 	int		offset_y;
 	int		i;
 
 	offset_x = 0;
-	while ((cord.x[0] - offset_x) >= 0 && (cord.x[1] - offset_x) >= 0 && (cord.x[2] - offset_x) >= 0 && (cord.x[3] - offset_x) >= 0)
+	while ((cord.x[0] - offset_x) >= 0 && (cord.x[1] - offset_x) >= 0 &&
+	(cord.x[2] - offset_x) >= 0 && (cord.x[3] - offset_x) >= 0)
 		offset_x++;
 	offset_y = 0;
-	while ((cord.y[0] - offset_y) >= 0 && (cord.y[1] - offset_y) >= 0 && (cord.y[2] - offset_y) >= 0 && (cord.y[3] - offset_y) >= 0)
+	while ((cord.y[0] - offset_y) >= 0 && (cord.y[1] - offset_y) >= 0 &&
+	(cord.y[2] - offset_y) >= 0 && (cord.y[3] - offset_y) >= 0)
 		offset_y++;
 	i = 0;
 	while (i < 4)
@@ -85,70 +87,46 @@ t_term	ft_mv_data(t_term cord)
 	while (i < 4)
 		cord.y[i++] -= (offset_y - 1);
 	i = 0;
-	ft_putnbr(offset_x);
-	ft_putchar('\n');
-	ft_putnbr(offset_y);
-	while (i < 4)
-	{
-		ft_putchar('\n');
-		ft_putnbr(cord.x[i]);
-		ft_putchar(' ');
-		ft_putnbr(cord.y[i]);
-		ft_putchar('\n');
-		i++;
-	}
 	return (cord);
 }
 
-t_term	ft_fill_data(char *line)
+t_term		ft_fill_data(char *line)
 {
 	t_term	cord;
 	int		i;
 	int		j;
- 
+
 	i = 0;
 	j = 0;
 	while (i < 19 && j < 4)
 	{
-		ft_putchar(line[i]);
 		cord.x[j] = i / 5;
 		cord.y[j] = i % 5;
 		if (line[i++] == '#')
 			j++;
 	}
-	/*i = 0;
-	while (i < 4)
-	{
-		ft_putchar('\n');
-		ft_putnbr(cord.x[i]);
-		ft_putchar(' ');
-		ft_putnbr(cord.y[i]);
-		ft_putchar('\n');
-		i++;
-	}*/
 	cord = ft_mv_data(cord);
 	return (cord);
 }
 
-int			ft_check_file(int fd, char	*line, t_term	*data)
+int			ft_check_file(int fd, char *line, t_term *data, int *count_term)
 {
-	int		ref;
-	int		count_term;
+	int	ref;
 
-	count_term = 0;
-	while ((ref = read(fd, line, 21)) == 21)// Защита на колличество терминошек
+	*count_term = 0;
+	while ((ref = read(fd, line, 21)) == 21 && *count_term < 26)
 	{
 		if (ft_check_term(line, ref) != 0)
 			return (-1);
-		data[count_term] = ft_fill_data(line);
-		count_term++;
+		data[*count_term] = ft_fill_data(line);
+		(*count_term)++;
 	}
 	if (ref != 20)
 		return (-1);
 	if ((ft_check_term(line, ref) != 0))
 		return (-1);
-	if (count_term > 26)
+	if (*count_term == 26)
 		return (-1);
-	data[count_term] = ft_fill_data(line);
+	data[*count_term] = ft_fill_data(line);
 	return (0);
 }
