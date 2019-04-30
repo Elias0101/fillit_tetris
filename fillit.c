@@ -6,11 +6,13 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 12:50:12 by smanhack          #+#    #+#             */
-/*   Updated: 2019/04/25 14:57:17 by smanhack         ###   ########.fr       */
+/*   Updated: 2019/04/30 12:29:55 by tkarri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+#include <stdio.h>
 
 int		main(int argc, char **argv)
 {

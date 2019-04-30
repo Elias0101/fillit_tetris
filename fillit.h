@@ -6,7 +6,7 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 12:55:39 by smanhack          #+#    #+#             */
-/*   Updated: 2019/04/29 19:48:57 by tkarri           ###   ########.fr       */
+/*   Updated: 2019/04/30 13:52:40 by tkarri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef	struct	s_term
 
 int		ft_check_file(int fd, char *line, t_term *data);
 
-int		is_empty_and_correct(t_term *figure, size_t size, char **map);
+int		is_empty_and_correct(t_term *figure, int size, char **map);
 
-int		if_possible(char **map, size_t size, t_term *figure, int i, int j);
+int		if_possible(char **map, int size, t_term *figure, int i, int j);
 
 #endif
