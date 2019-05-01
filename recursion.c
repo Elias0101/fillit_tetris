@@ -3,13 +3,29 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
-#define EMPTY_T '0'
+#define EMPTY_T '~'
 
 char **g_map;
 
 int g_map_size;
 
 int g_count_f;
+
+void    print_answer(void)
+{
+  int i;
+  int j;
+
+  i = -1;
+  j = -1;
+  while (++i < g_map_size)
+    {
+      while (++j < g_map_size)
+        printf("%c ", g_map[i][j]);
+      printf("\n");
+      j = -1;
+    }
+}
 
 void	change_combination(t_term *figure, int *id_current, int *i, int *j)
 {
@@ -21,7 +37,7 @@ void	change_combination(t_term *figure, int *id_current, int *i, int *j)
 	if (*id_current == 0) //не хватает размера
 	{
 		*i = 0;
-		*j = 0;
+		*j = -1;
 		g_map_size++;
 	}
 	else //меняем комбинацию б.к.
@@ -33,8 +49,10 @@ void	change_combination(t_term *figure, int *id_current, int *i, int *j)
 		while (++tmp < 4)
 			g_map[(last_felt->y)[tmp]][(last_felt->x)[tmp]] = EMPTY_T;
 		*i = i_last;
-		*j = j_last + 1; //начинаем со следующего базового квадрата
+		*j = j_last; //начинаем со следующего базового квадрата
+		*id_current -= 1;
 	}
+	print_answer();
 }
 
 void	fill_figure(t_term *figure, int id_current)
@@ -46,6 +64,7 @@ void	fill_figure(t_term *figure, int id_current)
 	i = -1;
 	while (++i < 4)
 		g_map[(curr->y)[i]][(curr->x)[i]] = 'A' + id_current;
+	print_answer();
 }
 
 void	fill_it(t_term *figure)
@@ -54,37 +73,27 @@ void	fill_it(t_term *figure)
 	static int i;
 	static int j;
 
-	if (id_current == g_count_f) //вписали все элементы ? хорош
+	printf("iteration: i = %d; j = %d; id_current = %d; g_map_size = %d\n", i, j, id_current, g_map_size);
+	if (id_current == g_count_f)
 		return ;
-	if (j == g_map_size) //следующее id
+	if (j == g_map_size)
 	{
 		j = 0;
 		i++;
 	}
-	if (i == g_map_size) //не вписали все элементы и дошли до конца
+	if (i == g_map_size)
 	{
 		change_combination(figure, &id_current, &i, &j);
-		fill_it(figure);
 	}
-	if (g_map[i][j] == EMPTY_T && if_possible(g_map, g_map_size, figure + id_current, i, j))
+	else if (g_map[i][j] == EMPTY_T && if_possible(g_map, g_map_size, figure + id_current, i, j))
 	{
 		fill_figure(figure, id_current);
 		id_current++;
+		i = 0;
+		j = -1;
 	}
-	else if (++j > 0)
-		fill_it(figure);
-}
-
-void	print_figure(t_term *figure)
-{
-	int i = -1;
-
-	printf("\n\nPRINT FIGURE\n\n");
-	while (++i < 4)
-	{
-		printf("x[%d] = %d; y[%d] = %d\n", i, figure->x[i], i, figure->y[i]);
-	}
-	printf("\n");
+	++j;
+	fill_it(figure);
 }
 
 int     main(int argc, char **argv)
@@ -116,12 +125,17 @@ int     main(int argc, char **argv)
 	int i = 0;
 	while (i < 26)
 	{
-		g_map[i] = (char *)malloc(sizeof(char) * 105);
+		g_map[i] = (char *)malloc(sizeof(char) * 20);
+		ft_memset(g_map[i], '~', 24);
 		i++;
 	}
-	g_count_f = 2;
-	g_map_size = 4;
+	printf("\n\n\nReading was done\n\n");
+	g_count_f = 4;
+	g_map_size = 2;
+	print_answer();
 	fill_it(data);
+	print_answer();
+	printf("\n\nAFTER ANSWER:\ng_map_size: %d\ng_count_f: %d\n", g_map_size, g_count_f);
 	free(line);
 	close(fd);
 	return (0);

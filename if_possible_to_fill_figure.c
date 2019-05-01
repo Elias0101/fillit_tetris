@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "fillit.h"
-#define EMPTY '0'
+#define EMPTY '~'
 
 int	is_empty_and_correct(t_term *figure, int size, char **map)
 {
@@ -17,6 +17,18 @@ int	is_empty_and_correct(t_term *figure, int size, char **map)
   return (1);
 }
 
+void    print_figure(t_term *figure)
+{
+  int i = -1;
+
+  printf("PRINT FIGURE\n");
+  while (++i < 4)
+    {
+      printf("x[%d] = %d; y[%d] = %d\n", i, figure->x[i], i, figure->y[i]);
+    }
+  printf("\n");
+}
+
 int	if_possible(char **map, int size, t_term *figure, int i, int j)
 {
   int change_i;
@@ -28,6 +40,8 @@ int	if_possible(char **map, int size, t_term *figure, int i, int j)
   diff_j = j - (figure->x)[0];
   change_i = 0;
   change_j = -1;
+  printf("BEFORE\n");
+  print_figure(figure);
   while (++change_i <= 2)
     {
       while (++change_j < 4)
@@ -39,6 +53,8 @@ int	if_possible(char **map, int size, t_term *figure, int i, int j)
 	}
       change_j = -1;
     }
+  printf("AFTER\n");
+  print_figure(figure);
   return (is_empty_and_correct(figure, size, map));
 }
 /*
@@ -56,7 +72,7 @@ int main(int ac, char **av)
   if (ac > 1)
     {
       printf("%c\n", av[1][0]);
-      printf("%d\n", if_possible(av, 4, figure, 2, 3));
+      printf("%d\n", if_possible(av, 4, figure, atoi(av[1]), atoi(av[2])));
     }
   free(figure);
   return (0);
