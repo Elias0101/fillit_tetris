@@ -6,7 +6,7 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 11:50:13 by smanhack          #+#    #+#             */
-/*   Updated: 2019/04/25 14:52:21 by smanhack         ###   ########.fr       */
+/*   Updated: 2019/05/02 18:16:49 by tkarri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,22 +72,22 @@ t_term	ft_mv_data(t_term cord)
 	int		offset_y;
 	int		i;
 
-	offset_x = 0;
-	while ((cord.x[0] - offset_x) >= 0 && (cord.x[1] - offset_x) >= 0 && (cord.x[2] - offset_x) >= 0 && (cord.x[3] - offset_x) >= 0)
-		offset_x++;
 	offset_y = 0;
 	while ((cord.y[0] - offset_y) >= 0 && (cord.y[1] - offset_y) >= 0 && (cord.y[2] - offset_y) >= 0 && (cord.y[3] - offset_y) >= 0)
 		offset_y++;
-	i = 0;
-	while (i < 4)
-		cord.x[i++] -= (offset_x - 1);
+	offset_x = 0;
+	while ((cord.x[0] - offset_x) >= 0 && (cord.x[1] - offset_x) >= 0 && (cord.x[2] - offset_x) >= 0 && (cord.x[3] - offset_x) >= 0)
+		offset_x++;
 	i = 0;
 	while (i < 4)
 		cord.y[i++] -= (offset_y - 1);
 	i = 0;
-	ft_putnbr(offset_x);
+	while (i < 4)
+		cord.x[i++] -= (offset_x - 1);
+	i = 0;
+	/*ft_putnbr(offset_y);
 	ft_putchar('\n');
-	ft_putnbr(offset_y);
+	ft_putnbr(offset_x);
 	while (i < 4)
 	{
 		ft_putchar('\n');
@@ -96,7 +96,7 @@ t_term	ft_mv_data(t_term cord)
 		ft_putnbr(cord.y[i]);
 		ft_putchar('\n');
 		i++;
-	}
+	}*/
 	return (cord);
 }
 
@@ -110,9 +110,9 @@ t_term	ft_fill_data(char *line)
 	j = 0;
 	while (i < 19 && j < 4)
 	{
-		ft_putchar(line[i]);
-		cord.x[j] = i / 5;
-		cord.y[j] = i % 5;
+		//ft_putchar(line[i]);
+		cord.y[j] = i / 5;
+		cord.x[j] = i % 5;
 		if (line[i++] == '#')
 			j++;
 	}
@@ -150,5 +150,5 @@ int			ft_check_file(int fd, char	*line, t_term	*data)
 	if (count_term > 26)
 		return (-1);
 	data[count_term] = ft_fill_data(line);
-	return (0);
+	return (count_term + 1);
 }

@@ -52,7 +52,7 @@ void	change_combination(t_term *figure, int *id_current, int *i, int *j)
 		*j = j_last; //начинаем со следующего базового квадрата
 		*id_current -= 1;
 	}
-	print_answer();
+	//print_answer();
 }
 
 void	fill_figure(t_term *figure, int id_current)
@@ -64,7 +64,7 @@ void	fill_figure(t_term *figure, int id_current)
 	i = -1;
 	while (++i < 4)
 		g_map[(curr->y)[i]][(curr->x)[i]] = 'A' + id_current;
-	print_answer();
+	//print_answer();
 }
 
 void	fill_it(t_term *figure)
@@ -73,7 +73,7 @@ void	fill_it(t_term *figure)
 	static int i;
 	static int j;
 
-	printf("iteration: i = %d; j = %d; id_current = %d; g_map_size = %d\n", i, j, id_current, g_map_size);
+	//printf("iteration: i = %d; j = %d; id_current = %d; g_map_size = %d\n", i, j, id_current, g_map_size);
 	if (id_current == g_count_f)
 		return ;
 	if (j == g_map_size)
@@ -114,7 +114,7 @@ int     main(int argc, char **argv)
         ft_putendl("error");
         return (0);
     }
-    if (fd < 0 || ft_check_file(fd, line, data) != 0)
+    if (fd < 0 || (g_count_f = ft_check_file(fd, line, data)) < 0)
     {
 		free(line);
         free(data);
@@ -129,14 +129,13 @@ int     main(int argc, char **argv)
 		ft_memset(g_map[i], '~', 24);
 		i++;
 	}
-	printf("\n\n\nReading was done\n\n");
-	g_count_f = 2;
+	//printf("\n\n\nReading was done\n\n");
 	g_map_size = 1;
-	print_figure(data);
-	print_answer();
+	//print_figure(data);
+	//print_answer();
 	fill_it(data);
 	print_answer();
-	printf("\n\nAFTER ANSWER:\ng_map_size: %d\ng_count_f: %d\n", g_map_size, g_count_f);
+	//printf("\n\nAFTER ANSWER:\ng_map_size: %d\ng_count_f: %d\n", g_map_size, g_count_f);
 	free(line);
 	close(fd);
 	return (0);

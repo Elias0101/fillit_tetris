@@ -12,11 +12,11 @@ int	is_empty_and_correct(t_term *figure, int size, char **map)
     {
       if ((figure->x)[i] >= size || (figure->y)[i] >= size || (figure->x)[i] < 0 || (figure->y)[i] < 0 ||
 	  map[(figure->y)[i]][(figure->x)[i]] != EMPTY)
-	return (0);
+		  return (0);
     }
   return (1);
 }
-
+/*
 void    print_figure(t_term *figure)
 {
   int i = -1;
@@ -28,7 +28,7 @@ void    print_figure(t_term *figure)
     }
   printf("\n");
 }
-
+*/
 int	if_possible(char **map, int size, t_term *figure, int i, int j)
 {
   int change_i;
@@ -40,8 +40,8 @@ int	if_possible(char **map, int size, t_term *figure, int i, int j)
   diff_j = j - (figure->x)[0];
   change_i = 0;
   change_j = -1;
-  printf("BEFORE\n");
-  print_figure(figure);
+  //printf("BEFORE\n");
+  //print_figure(figure);
   while (++change_i <= 2)
     {
       while (++change_j < 4)
@@ -53,8 +53,8 @@ int	if_possible(char **map, int size, t_term *figure, int i, int j)
 	}
       change_j = -1;
     }
-  printf("AFTER\n");
-  print_figure(figure);
+  //printf("AFTER\n");
+  //print_figure(figure);
   return (is_empty_and_correct(figure, size, map));
 }
 /*
