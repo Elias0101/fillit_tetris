@@ -130,8 +130,9 @@ int     main(int argc, char **argv)
 		i++;
 	}
 	printf("\n\n\nReading was done\n\n");
-	g_count_f = 4;
-	g_map_size = 2;
+	g_count_f = 2;
+	g_map_size = 1;
+	print_figure(data);
 	print_answer();
 	fill_it(data);
 	print_answer();

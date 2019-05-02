@@ -27,6 +27,8 @@ int		ft_check_file(int fd, char *line, t_term *data);
 
 int		is_empty_and_correct(t_term *figure, int size, char **map);
 
+void		print_figure(t_term *figure);
+
 int		if_possible(char **map, int size, t_term *figure, int i, int j);
 
 #endif
