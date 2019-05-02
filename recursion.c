@@ -1,9 +1,22 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   recursion.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tkarri <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/02 18:57:54 by tkarri            #+#    #+#             */
+/*   Updated: 2019/05/02 19:33:24 by tkarri           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
+
 #include <stdlib.h>
+
 #include <stdio.h>
+
 #include <unistd.h>
-#define EMPTY_T '~'
 
 char **g_map;
 
@@ -11,30 +24,14 @@ int g_map_size;
 
 int g_count_f;
 
-void    print_answer(void)
-{
-  int i;
-  int j;
-
-  i = -1;
-  j = -1;
-  while (++i < g_map_size)
-    {
-      while (++j < g_map_size)
-        printf("%c ", g_map[i][j]);
-      printf("\n");
-      j = -1;
-    }
-}
-
-void	change_combination(t_term *figure, int *id_current, int *i, int *j)
+void	change_combination(t_term *figure, int *id_curr, int *i, int *j)
 {
 	int i_last;
 	int j_last;
 	int tmp;
 	t_term *last_felt;
 
-	if (*id_current == 0) //не хватает размера
+	if (*id_curr == 0) //не хватает размера
 	{
 		*i = 0;
 		*j = -1;
@@ -43,38 +40,39 @@ void	change_combination(t_term *figure, int *id_current, int *i, int *j)
 	else //меняем комбинацию б.к.
 	{
 		tmp = -1;
-		last_felt = figure + *id_current - 1;
+		last_felt = figure + *id_curr - 1;
 		j_last = (last_felt->x)[0];
 		i_last = (last_felt->y)[0];
 		while (++tmp < 4)
-			g_map[(last_felt->y)[tmp]][(last_felt->x)[tmp]] = EMPTY_T;
+			g_map[(last_felt->y)[tmp]][(last_felt->x)[tmp]] = EMPTY;
 		*i = i_last;
 		*j = j_last; //начинаем со следующего базового квадрата
-		*id_current -= 1;
+		*id_curr = (*id_curr) - 1;
 	}
 	//print_answer();
 }
 
-void	fill_figure(t_term *figure, int id_current)
+void	fill_figure(t_term *figure, int *id_curr, int *i, int *j)
 {
-	int i;
+	int f;
 	t_term *curr;
 
-	curr = figure + id_current;
-	i = -1;
-	while (++i < 4)
-		g_map[(curr->y)[i]][(curr->x)[i]] = 'A' + id_current;
-	//print_answer();
+	curr = figure + *id_curr;
+	f = -1;
+	while (++f < 4)
+		g_map[(curr->y)[f]][(curr->x)[f]] = 'A' + *id_curr;
+	*id_curr += 1;
+	*i = 0;
+	*j = -1;
 }
 
 void	fill_it(t_term *figure)
 {
-	static int id_current;
+	static int id_curr;
 	static int i;
 	static int j;
 
-	//printf("iteration: i = %d; j = %d; id_current = %d; g_map_size = %d\n", i, j, id_current, g_map_size);
-	if (id_current == g_count_f)
+	if (id_curr == g_count_f)
 		return ;
 	if (j == g_map_size)
 	{
@@ -83,14 +81,12 @@ void	fill_it(t_term *figure)
 	}
 	if (i == g_map_size)
 	{
-		change_combination(figure, &id_current, &i, &j);
+		change_combination(figure, &id_curr, &i, &j);
 	}
-	else if (g_map[i][j] == EMPTY_T && if_possible(g_map, g_map_size, figure + id_current, i, j))
+	else if (g_map[i][j] == EMPTY && move_figure(figure + id_curr, i, j)
+	&& try_record(figure + id_curr, g_map_size, g_map))
 	{
-		fill_figure(figure, id_current);
-		id_current++;
-		i = 0;
-		j = -1;
+		fill_figure(figure, &id_curr, &i, &j);
 	}
 	++j;
 	fill_it(figure);
@@ -126,15 +122,17 @@ int     main(int argc, char **argv)
 	while (i < 26)
 	{
 		g_map[i] = (char *)malloc(sizeof(char) * 20);
-		ft_memset(g_map[i], '~', 24);
+		ft_memset(g_map[i], EMPTY, 24);
 		i++;
 	}
 	//printf("\n\n\nReading was done\n\n");
 	g_map_size = 1;
 	//print_figure(data);
 	//print_answer();
+	printf("data filled\n");
 	fill_it(data);
-	print_answer();
+	printf("recursion ended\n");
+	print_answer(g_map, g_map_size);
 	//printf("\n\nAFTER ANSWER:\ng_map_size: %d\ng_count_f: %d\n", g_map_size, g_count_f);
 	free(line);
 	close(fd);
