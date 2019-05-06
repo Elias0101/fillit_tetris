@@ -12,7 +12,7 @@
 
 #ifndef FILLIT_H
 # define FILLIT_H
-# define EMPTY '.'
+# define EMPTY '~'
 # include "libft/includes/libft.h"
 # include <libc.h>
 

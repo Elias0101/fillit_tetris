@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   recursion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkarri <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 13:54:34 by tkarri            #+#    #+#             */
-/*   Updated: 2019/05/06 14:38:47 by tkarri           ###   ########.fr       */
+/*   Updated: 2019/05/06 16:47:00 by smanhack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,7 @@ void	print_answer(void)
 	while (++i < g_map_size)
 	{
 		while (++j < g_map_size)
-		{
 			ft_putchar(g_map[i][j]);
-			if (j + 1 != g_map_size)
-				ft_putchar(' ');
-		}
 		ft_putchar('\n');
 		j = -1;
 	}
@@ -48,12 +44,13 @@ void	change_combination(t_term *figure, int *id_current,
 	int		i_last;
 	int		j_last;
 	int		tmp;
-	t_term	*last_felt;
+	t_term		*last_felt;
 
 	if (*id_current == 0)
 	{
 		*i = 0;
 		*j = -1;
+		g_map = ft_map_updata(&g_map, g_map_size);
 		g_map_size++;
 	}
 	else
@@ -87,6 +84,8 @@ void	fill_it(t_term *figure)
 	static int i;
 	static int j;
 
+	print_answer();
+	ft_putendl("fill_it started");
 	if (id_current == g_count_f)
 		return ;
 	if (j == g_map_size)
@@ -94,19 +93,30 @@ void	fill_it(t_term *figure)
 		j = 0;
 		i++;
 	}
+	ft_putendl("if-else started");
 	if (i == g_map_size)
 	{
+		ft_putendl("change_combination started");
 		change_combination(figure, &id_current, &i, &j);
+		ft_putendl("change_combination edned");
 	}
-	else if (g_map[i][j] == EMPTY && move_figure(figure + id_current, i, j)
-		&& is_fillable(figure + id_current, g_map_size, g_map))
+	else if (g_map[i][j] == EMPTY && move_figure(figure + id_current, i, j))
 	{
-		fill_figure(figure, id_current);
-		id_current++;
-		i = 0;
-		j = -1;
+		ft_putendl("is_fillable started extern");
+		if ((is_fillable(figure + id_current, g_map_size, g_map)))
+		{
+			ft_putendl("fill_figure started");
+			fill_figure(figure, id_current);
+			id_current++;
+			i = 0;
+			j = -1;
+			ft_putendl("fill_figure ended");
+		}
+		ft_putendl("is_fillable ended extern");
 	}
+	ft_putendl("if-else ended");
 	++j;
+	ft_putendl("fill_it ended");
 	fill_it(figure);
 }
 
@@ -135,15 +145,8 @@ int		main(int argc, char **argv)
 		ft_putendl("error");
 		return (0);
 	}
-	g_map = (char **)malloc(sizeof(char *) * 26);
-	int i = 0;
-	while (i < 26)
-	{
-		g_map[i] = (char *)malloc(sizeof(char) * 20);
-		ft_memset(g_map[i], '~', 20);
-		i++;
-	}
-	g_map_size = 1;
+	g_map_size = ft_min_sqrt(g_count_f * 4);
+	g_map = ft_map_create(g_map_size);
 	fill_it(data);
 	print_answer();
 	free(line);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   if_possible_to_fill_figure.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkarri <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 13:43:07 by tkarri            #+#    #+#             */
-/*   Updated: 2019/05/06 14:11:11 by tkarri           ###   ########.fr       */
+/*   Updated: 2019/05/06 16:48:43 by smanhack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int		is_fillable(t_term *figure, int size, char **map)
 {
 	int i;
 
+	ft_putendl("is_fillable started");
 	i = -1;
 	while (++i < 4)
 	{
@@ -26,6 +27,7 @@ int		is_fillable(t_term *figure, int size, char **map)
 			|| map[(figure->y)[i]][(figure->x)[i]] != EMPTY)
 			return (0);
 	}
+	ft_putendl("is_fillable ended");
 	return (1);
 }
 
@@ -36,6 +38,7 @@ int		move_figure(t_term *figure, int i, int j)
 	int diff_i;
 	int diff_j;
 
+	ft_putendl("move figure started");
 	diff_i = i - (figure->y)[0];
 	diff_j = j - (figure->x)[0];
 	change_i = 0;
@@ -51,5 +54,6 @@ int		move_figure(t_term *figure, int i, int j)
 		}
 		change_j = -1;
 	}
+	ft_putendl("move figure ended");
 	return (1);
 }
