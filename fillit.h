@@ -6,7 +6,7 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 12:55:39 by smanhack          #+#    #+#             */
-/*   Updated: 2019/05/06 14:11:00 by tkarri           ###   ########.fr       */
+/*   Updated: 2019/05/06 18:06:57 by smanhack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ char				**ft_map_create(int size);
 char				**ft_map_updata(char ***map, int size);
 
 int				ft_min_sqrt(int count);
+
+void			print_answer(int map_size, char **map);
 
 #endif
