@@ -1,80 +1,55 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   if_possible_to_fill_figure.c                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tkarri <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/06 13:43:07 by tkarri            #+#    #+#             */
+/*   Updated: 2019/05/06 14:11:11 by tkarri           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "fillit.h"
-#define EMPTY '~'
 
-int	is_empty_and_correct(t_term *figure, int size, char **map)
+int		is_fillable(t_term *figure, int size, char **map)
 {
-  int i;
+	int i;
 
-  i = -1;
-  while (++i < 4)
-    {
-      if ((figure->x)[i] >= size || (figure->y)[i] >= size || (figure->x)[i] < 0 || (figure->y)[i] < 0 ||
-	  map[(figure->y)[i]][(figure->x)[i]] != EMPTY)
-		  return (0);
-    }
-  return (1);
-}
-/*
-void    print_figure(t_term *figure)
-{
-  int i = -1;
-
-  printf("PRINT FIGURE\n");
-  while (++i < 4)
-    {
-      printf("x[%d] = %d; y[%d] = %d\n", i, figure->x[i], i, figure->y[i]);
-    }
-  printf("\n");
-}
-*/
-int	if_possible(char **map, int size, t_term *figure, int i, int j)
-{
-  int change_i;
-  int change_j;
-  int diff_i;
-  int diff_j;
-
-  diff_i = i - (figure->y)[0];
-  diff_j = j - (figure->x)[0];
-  change_i = 0;
-  change_j = -1;
-  //printf("BEFORE\n");
-  //print_figure(figure);
-  while (++change_i <= 2)
-    {
-      while (++change_j < 4)
+	i = -1;
+	while (++i < 4)
 	{
-	  if (change_i == 1)
-	      (figure->x)[change_j] += diff_j;
-	  else
-	      (figure->y)[change_j] += diff_i;
+		if ((figure->x)[i] >= size || (figure->y)[i] >= size
+			|| (figure->x)[i] < 0 || (figure->y)[i] < 0
+			|| map[(figure->y)[i]][(figure->x)[i]] != EMPTY)
+			return (0);
 	}
-      change_j = -1;
-    }
-  //printf("AFTER\n");
-  //print_figure(figure);
-  return (is_empty_and_correct(figure, size, map));
+	return (1);
 }
-/*
-int main(int ac, char **av)
+
+int		move_figure(t_term *figure, int i, int j)
 {
-  t_term *figure = (t_term *)malloc(sizeof(t_term));
-  figure->x[0] = 0;
-  figure->y[0] = 0;
-  figure->x[1] = 1;
-  figure->y[1] = 0;
-  figure->x[2] = 0;
-  figure->y[2] = 1;
-  figure->x[3] = 1;
-  figure->y[3] = 1;
-  if (ac > 1)
-    {
-      printf("%c\n", av[1][0]);
-      printf("%d\n", if_possible(av, 4, figure, atoi(av[1]), atoi(av[2])));
-    }
-  free(figure);
-  return (0);
+	int change_i;
+	int change_j;
+	int diff_i;
+	int diff_j;
+
+	diff_i = i - (figure->y)[0];
+	diff_j = j - (figure->x)[0];
+	change_i = 0;
+	change_j = -1;
+	while (++change_i <= 2)
+	{
+		while (++change_j < 4)
+		{
+			if (change_i == 1)
+				(figure->x)[change_j] += diff_j;
+			else
+				(figure->y)[change_j] += diff_i;
+		}
+		change_j = -1;
+	}
+	return (1);
 }
-*/

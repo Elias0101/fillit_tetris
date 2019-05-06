@@ -6,13 +6,13 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 12:55:39 by smanhack          #+#    #+#             */
-/*   Updated: 2019/04/30 13:52:40 by tkarri           ###   ########.fr       */
+/*   Updated: 2019/05/06 14:11:00 by tkarri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLIT_H
 # define FILLIT_H
-
+# define EMPTY '~'
 # include "libft/includes/libft.h"
 # include <libc.h>
 
@@ -23,12 +23,12 @@ typedef	struct	s_term
 
 }				t_term;
 
-int		ft_check_file(int fd, char *line, t_term *data);
+int				ft_check_file(int fd, char *line, t_term *data);
 
-int		is_empty_and_correct(t_term *figure, int size, char **map);
+void			print_figure(t_term *figure);
 
-void		print_figure(t_term *figure);
+int				is_fillable(t_term *figure, int size, char **map);
 
-int		if_possible(char **map, int size, t_term *figure, int i, int j);
+int				move_figure(t_term *figure, int i, int j);
 
 #endif
