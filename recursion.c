@@ -6,7 +6,7 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 13:54:34 by tkarri            #+#    #+#             */
-/*   Updated: 2019/05/06 18:34:57 by smanhack         ###   ########.fr       */
+/*   Updated: 2019/05/06 18:49:25 by smanhack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,10 @@ void	fill_it(t_term *figure)
 		if (i == g_map_size)
 			change_combination(figure, &id_current, &i, &j);
 		else if (g_map[i][j] == EMPTY && move_figure(figure + id_current, i, j)
-		&& is_fillable(figure + id_current, g_map_size, g_map))
+		&& is_fillable(figure + id_current, g_map_size, g_map) && (i = 0) == 0)
 		{
 			fill_figure(figure, id_current);
 			id_current++;
-			i = 0;
 			j = -1;
 		}
 		j++;

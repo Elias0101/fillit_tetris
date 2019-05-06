@@ -6,7 +6,7 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 11:50:13 by smanhack          #+#    #+#             */
-/*   Updated: 2019/05/06 18:12:16 by smanhack         ###   ########.fr       */
+/*   Updated: 2019/05/06 18:53:23 by smanhack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int			ft_check_file(int fd, char *line, t_term *data)
 		return (-1);
 	if ((ft_check_term(line, ref) != 0))
 		return (-1);
-	if (count_term > 26)
+	if (count_term >= 26)
 		return (-1);
 	data[count_term] = ft_fill_data(line);
 	return (count_term + 1);
