@@ -6,7 +6,7 @@
 #    By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/02 18:27:40 by smanhack          #+#    #+#              #
-#    Updated: 2019/05/06 17:07:43 by smanhack         ###   ########.fr        #
+#    Updated: 2019/05/06 18:31:54 by smanhack         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ all: $(NAME)
 
 $(NAME):
 	@make -C $(LIB) re
-	gcc -g $(CFLAGS) -o $(NAME) $(SRC) -I. -L$(LIB) -lft
+	gcc $(CFLAGS) -o $(NAME) $(SRC) -I. -L$(LIB) -lft
 
 clean:
 	@make -C $(LIB) clean

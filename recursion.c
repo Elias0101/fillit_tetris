@@ -6,7 +6,7 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 13:54:34 by tkarri            #+#    #+#             */
-/*   Updated: 2019/05/06 18:07:41 by smanhack         ###   ########.fr       */
+/*   Updated: 2019/05/06 18:34:57 by smanhack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,9 @@ void	fill_it(t_term *figure)
 			i++;
 		}
 		if (i == g_map_size)
-		{
 			change_combination(figure, &id_current, &i, &j);
-		}
-		else if (g_map[i][j] == EMPTY && move_figure(figure + id_current, i, j) && is_fillable(figure + id_current, g_map_size, g_map))
+		else if (g_map[i][j] == EMPTY && move_figure(figure + id_current, i, j)
+		&& is_fillable(figure + id_current, g_map_size, g_map))
 		{
 			fill_figure(figure, id_current);
 			id_current++;
@@ -90,7 +89,7 @@ void	fill_it(t_term *figure)
 			j = -1;
 		}
 		j++;
-		}
+	}
 }
 
 int		check_errors(t_term **data, int argc, char **argv)
@@ -131,6 +130,7 @@ int		main(int argc, char **argv)
 	g_map_size = ft_min_sqrt(g_count_f * 4);
 	g_map = ft_map_create(g_map_size);
 	fill_it(data);
+	free(data);
 	if (g_map == NULL)
 		ft_putendl("error");
 	else

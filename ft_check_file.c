@@ -6,7 +6,7 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 11:50:13 by smanhack          #+#    #+#             */
-/*   Updated: 2019/05/06 17:47:03 by smanhack         ###   ########.fr       */
+/*   Updated: 2019/05/06 18:12:16 by smanhack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,10 @@ t_term		ft_fill_data(char *line)
 	return (cord);
 }
 
-int			ft_check_file(int fd, char	*line, t_term	*data)
+int			ft_check_file(int fd, char *line, t_term *data)
 {
-	int		ref;
-	int		count_term;
+	int	ref;
+	int	count_term;
 
 	count_term = 0;
 	while ((ref = read(fd, line, 21)) == 21 && count_term < 26)

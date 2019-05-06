@@ -6,7 +6,7 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 12:55:39 by smanhack          #+#    #+#             */
-/*   Updated: 2019/05/06 18:06:57 by smanhack         ###   ########.fr       */
+/*   Updated: 2019/05/06 18:12:41 by smanhack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ typedef	struct	s_term
 
 int				ft_check_file(int fd, char *line, t_term *data);
 
-void				print_figure(t_term *figure);
+void			print_figure(t_term *figure);
 
 int				is_fillable(t_term *figure, int size, char **map);
 
 int				move_figure(t_term *figure, int i, int j);
 
-void				ft_map_free(char ***map, int size);
+void			ft_map_free(char ***map, int size);
 
-char				**ft_map_create(int size);
+char			**ft_map_create(int size);
 
-char				**ft_map_updata(char ***map, int size);
+char			**ft_map_updata(char ***map, int size);
 
 int				ft_min_sqrt(int count);
 
