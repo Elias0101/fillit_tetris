@@ -6,14 +6,13 @@
 /*   By: smanhack <smanhack@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 13:54:34 by tkarri            #+#    #+#             */
-/*   Updated: 2019/05/06 18:49:25 by smanhack         ###   ########.fr       */
+/*   Updated: 2019/05/07 13:09:13 by smanhack         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "fillit.h"
 #include <stdlib.h>
-#include <stdio.h>
 #include <unistd.h>
 
 char	**g_map;
